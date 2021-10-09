@@ -1,57 +1,55 @@
-const crypto = require('crypto')
-const DB = require('./db')
-const db = new DB('./contacts.json')
+const { Schema, model } = require('mongoose')
 
 
-const listContacts = async () => {
-  return await db.read()
-}
+const contactSchema = new Schema(
+  {
+    name: {
+      type: String,
+      
+      required: [true, 'Set name for contact'],
+    },
+    email: {
+      type: String,
+     
+    },
+    phone: {
+      type: String,
+     },
+  
+    favorite: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    
+  },
+  {
+    versionKey: false,
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: function (doc, ret) {
+        delete ret._id
+        
+        return ret
+      },
+    },
+    toObject: { virtuals: true },
+  },
+)
 
-const getContactById = async (id) => {
-  const contacts = await db.read()
-  const [contact] = contacts.filter((contact) => contact.id === id)
-  return contact
-}
-
-const removeContact = async (id) => {
-  const contacts = await db.read()
-  const index = contacts.findIndex((contact) => contact.id === id)
-  if (index !== -1) {
-    const [result] = contacts.splice(index, 1)
-    await db.write(contacts)
-    return result
+contactSchema.virtual('status').get(function () {
+  if (this.favorite === true) {
+    return 'favorite'
   }
-  return null
-}
+  return 'not favorite'
+})
 
-const addContact = async (body) => {
-  const contacts = await db.read()
-  const newContacts = {
-    id: crypto.randomUUID(),
-    favorite: false,
-    ...body,
-}
-contacts.push(newContacts)
-  await db.write(contacts)
-  return newContacts
+contactSchema.path('name').validate(function (value) {
+  const re = /[A-Z]\w+/
+  return re.test(String(value))
+})
 
-}
-const updateContact = async (id, body) => {
-  const contacts = await db.read()
-  const index = contacts.findIndex((contact) => contact.id === id)
-  if (index !== -1) {
-    contacts[index] = { ...contacts[index], ...body }
-    await db.write(contacts)
-    return contacts[index]
-  }
-  return null
+const Contact = model('contact', contactSchema)
 
-}
-
-module.exports = {
-  listContacts,
-  getContactById,
-  removeContact,
-  addContact,
-  updateContact,
-}
+module.exports = Contact
