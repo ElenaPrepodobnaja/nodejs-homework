@@ -1,8 +1,8 @@
-const Gender = {
-    MALE: 'male',
-    FEMALE: 'female',
-    NONE: 'none',
-  }
+const SUBSCRIPTION = {
+  starter: 'starter',
+  pro: 'pro',
+  business: 'business',
+}
   
   const HttpCode = {
     OK: 200,
@@ -19,7 +19,6 @@ const Gender = {
   }
   
   module.exports = {
-    
-    Gender,
-    HttpCode,
+    SUBSCRIPTION,
+   HttpCode,
   }
