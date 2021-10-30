@@ -1,4 +1,5 @@
 const SUBSCRIPTION = {
+<<<<<<< Updated upstream
   starter: 'starter',
   pro: 'pro',
   business: 'business',
