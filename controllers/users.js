@@ -62,7 +62,7 @@ const logout = async (req, res, next) => {
 }
 
 const currentUser = async (req, res, next) => {
-  const { email } = req.body;
+  const { email, subscription } = req.user;
   const user = await Users.findByEmail(email);
   if (!user ) {
       return res
@@ -72,7 +72,7 @@ const currentUser = async (req, res, next) => {
           message: 'Not authorized',
       })
   }
-  const subscription = user.subscription;
+  
   return res
       .status(HttpCode.OK).json({
           status: 'success',
