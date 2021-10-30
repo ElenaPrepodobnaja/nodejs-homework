@@ -8,6 +8,6 @@ const { validateUser } = require('./validation')
 router.post('/registration', validateUser, registration)
 router.post('/login', loginLimit, validateUser, login)
 router.post('/logout', guard, logout)
-router.get('/current', guard, validateUser, currentUser)
+router.get('/current', guard, currentUser)
 
 module.exports = router
