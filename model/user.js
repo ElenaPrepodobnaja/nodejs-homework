@@ -1,5 +1,9 @@
 const { Schema, model } = require('mongoose')
+<<<<<<< Updated upstream
 const gravatar = require('gravatar')
+=======
+
+>>>>>>> Stashed changes
 const bcrypt = require('bcryptjs')
 const SALT_FACTOR = 6
 
@@ -31,6 +35,7 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
+<<<<<<< Updated upstream
     avatar: {
       type: String,
       default: function () {
@@ -38,6 +43,8 @@ const userSchema = new Schema(
       },
     },
     idUserCloud: { type: String, default: null },
+=======
+>>>>>>> Stashed changes
     
   },
   {

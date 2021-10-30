@@ -1,7 +1,11 @@
 const jwt = require('jsonwebtoken')
+<<<<<<< Updated upstream
 const fs = require('fs/promises')
 const Users = require('../repository/users')
 const UploadService = require('../services/cloud-upload')
+=======
+const Users = require('../repository/users')
+>>>>>>> Stashed changes
 const { HttpCode } = require('../config/constants')
 require('dotenv').config()
 const SECRET_KEY = process.env.JWT_SECRET_KEY
@@ -26,7 +30,10 @@ const registration = async (req, res, next) => {
         name: newUser.name,
         email: newUser.email,
         subscription: newUser.subscription,
+<<<<<<< Updated upstream
         avatar: newUser.avatar,
+=======
+>>>>>>> Stashed changes
       },
     })
   } catch (e) {
@@ -65,7 +72,11 @@ const logout = async (req, res, next) => {
 }
 
 const currentUser = async (req, res, next) => {
+<<<<<<< Updated upstream
   const { email, subscription } = req.user;
+=======
+  const { email } = req.body;
+>>>>>>> Stashed changes
   const user = await Users.findByEmail(email);
   if (!user ) {
       return res
@@ -75,7 +86,11 @@ const currentUser = async (req, res, next) => {
           message: 'Not authorized',
       })
   }
+<<<<<<< Updated upstream
   
+=======
+  const subscription = user.subscription;
+>>>>>>> Stashed changes
   return res
       .status(HttpCode.OK).json({
           status: 'success',
@@ -87,6 +102,7 @@ const currentUser = async (req, res, next) => {
       })
 }
 
+<<<<<<< Updated upstream
 const uploadAvatar = async (req, res, next) => {
   const { id, idUserCloud } = req.user
   const file = req.file
@@ -113,10 +129,16 @@ const uploadAvatar = async (req, res, next) => {
   })
 }
 
+=======
+>>>>>>> Stashed changes
 module.exports = {
   registration,
   login,
   logout,
   currentUser,
+<<<<<<< Updated upstream
   uploadAvatar,
 }
+=======
+}
+>>>>>>> Stashed changes
