@@ -4,3 +4,7 @@ package*
 .DS_Store
 .vscode/
 .idea
+*/**/.env
+.env
+uploads
+users-avatars
