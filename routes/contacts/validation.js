@@ -4,7 +4,7 @@ Joi.objectId = require('joi-objectid')(Joi)
 
 const schemaContact = Joi.object({
   name: Joi.string().min(1).max(30).required(),
-  email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ca', 'org'] } }).required(),
+  email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ca', 'org', 'ua'] } }).required(),
   phone: Joi.string().required(),
   favorite: Joi.boolean().optional(),
 })
